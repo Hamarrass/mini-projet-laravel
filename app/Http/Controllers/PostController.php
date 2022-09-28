@@ -24,16 +24,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        
-         
-
-         
-
          
 
          return view('posts.index',
           [
-              'posts'=>Post::withCount('comments')->with(['user','tags'])->get(),
+              'posts'=>Post::postWithUserCommentsTags()->get(),
     
           ]);
 
@@ -82,7 +77,7 @@ class PostController extends Controller
     {
       
        $post = Cache::remember('post-show-{$id}',now()->addSeconds(60),function() use($id){
-          return  Post::with('comments','tags')->findOrFail($id);
+          return  Post::with('comments','tags','comments.user')->findOrFail($id);
        });
 
         return view('posts.show',compact('post'));

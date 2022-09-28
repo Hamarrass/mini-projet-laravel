@@ -17,7 +17,6 @@
       @foreach ($post->comments as $comment)
              <p>{{$comment->content}}</p>
         
-           
              <p>
                <x-updated :date="$comment->updated_at->diffForHumans()" :name="$comment->user->name"></x-updated>
              </p>
