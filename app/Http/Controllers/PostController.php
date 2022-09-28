@@ -53,6 +53,16 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
+        $hasFile = $request->hasFile('picture');
+        dump($hasFile);
+        if($hasFile){
+            $file= $request->file('picture');
+            dump($file->getClientMimeType());
+            dump($file->getClientOriginalExtension());
+            dump($file->getClientOriginalName());
+            $file->store('thumbnails');
+        }
+        die();
         
         $post= $request->except('_token') ;
         $post['slug']   = Str::slug($request->title,'--');

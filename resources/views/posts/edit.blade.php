@@ -1,7 +1,7 @@
 @extends('../layout')
 @section('content')
   <h1>Edit post </h1>
-    <form   method="POST"  action="{{route('posts.update',['post'=>$post->id])}}">
+    <form   method="POST"  action="{{route('posts.update',['post'=>$post->id])}}" enctype="multipart/form-data">
         @csrf
         @method('put')
      
