@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Image;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePost;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 { 
@@ -53,24 +55,19 @@ class PostController extends Controller
      */
     public function store(StorePost $request)
     {
-        $hasFile = $request->hasFile('picture');
-        dump($hasFile);
-        if($hasFile){
-            $file= $request->file('picture');
-            dump($file->getClientMimeType());
-            dump($file->getClientOriginalExtension());
-            dump($file->getClientOriginalName());
-            $file->store('thumbnails');
-        }
-        die();
         
         $post= $request->except('_token') ;
         $post['slug']   = Str::slug($request->title,'--');
         $post['active'] = true ;
-         $post['user_id'] = $request->user()->id  ;
-         
+        $post['user_id'] = $request->user()->id  ;
+        $post = Post::create($post);
 
-         $post = Post::create($post);
+        if($request->hasFile('picture')){
+            $path =$request->file('picture')->store('posts');
+            $image=new Image(['path'=>$path]);
+            $post->image()->save($image);
+         
+          }
          $request->session()->flash('status','bien enregistré');
 
 

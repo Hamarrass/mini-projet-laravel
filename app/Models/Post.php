@@ -29,6 +29,10 @@ class Post extends Model
        return $this->belongsToMany(Tag::class)->withTimestamps();
      }
 
+     public function image(){
+          return $this->hasOne(Image::class);
+     }
+
      public function scopeMostCommented(Builder $query){
        return $query->withCount('comments')->orderBy('comments_count','desc');
      }
