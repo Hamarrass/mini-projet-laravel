@@ -82,7 +82,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
-      
+     
        $post = Cache::remember('post-show-{$id}',now()->addSeconds(60),function() use($id){
           return  Post::with('comments','tags','comments.user')->findOrFail($id);
        });
@@ -115,7 +115,17 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-       
+         if($request->hasFile('picture')){
+             $path= $request->file('picture')->store('posts');
+             if($post->image){
+                Storage::delete($post->image->path);
+                $post->image->path = $path;
+                $post->image->save();
+             }
+             else {
+                 $post->image->save(Image::create(['path'=>$path]));
+             }
+         }
 
         $post->title = $request->title  ; 
         $post->content = $request->content  ;

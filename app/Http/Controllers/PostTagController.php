@@ -21,11 +21,11 @@ class PostTagController extends Controller
          $tag = Tag::find($id);
      
          return view('posts.index',[
-             'posts'=>$tag->posts()->postWithUserCommentsTags->get(),
+             'posts'=>$tag->posts()->postWithUserCommentsTags()->get(),
              'mostComments'=> [] ,
              'mostPosts' => [] ,
              'mostUserActiveInlastMonth' =>[]
             ]);
-
+         
     }
 }

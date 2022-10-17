@@ -14,13 +14,18 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable; 
 
+
     public function posts(){
         return $this->hasMany(Post::class);
     }
 
     public function comments(){
-        return $this->hasMany(Comment::class);
+        return $this->morphMany(Comment::class,'commentable');
     }
+    
+    public function image(){
+        return $this->morphOne(Image::class,'imageable');
+   }
 
     /**
      * The attributes that are mass assignable.

@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Cache;
 
 class Post extends Model
 {
+
     use HasFactory, SoftDeletes;
 
      protected $fillable=['title','content','slug','active','user_id'];
     
      public function comments(){
-       return $this->hasMany(Comment::class)->dernier() ;
+       return $this->morphMany(Comment::class,'commentable')->dernier() ;
      }
 
      public function user(){
@@ -26,11 +27,11 @@ class Post extends Model
      }
 
      public  function tags(){
-       return $this->belongsToMany(Tag::class)->withTimestamps();
+       return $this->morphToMany(Tag::class,'taggable')->withTimestamps();
      }
 
      public function image(){
-          return $this->hasOne(Image::class);
+          return $this->morphOne(Image::class,'imageable');
      }
 
      public function scopeMostCommented(Builder $query){

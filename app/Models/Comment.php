@@ -19,26 +19,31 @@ class Comment extends Model
         return $this->belongsTo(Post::class);
     }
 
+    public  function tags(){
+        return $this->morphToMany(Tag::class,'taggable')->withTimestamps();
+      } 
+
     public function user(){
         return $this->belongsTo(User::class);
     }
 
-
-
+    public function commentable(){
+        return $this->morphTo();
+    }
+ 
 
     public function scopeDernier(Builder $query){
           return $query->orderBy(static::UPDATED_AT,'asc');
     }
-
-    
 
 
     public static function boot(){
         parent::boot();
 
         static::creating(function(Comment $comment){
-
-            Cache::forget("post-show-{$comment->post_id}");
+        if($comment->commentable != null){
+            Cache::forget("post-show-{$comment->commentable->id}");
+        }
      });
       
   
