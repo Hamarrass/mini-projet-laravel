@@ -31,6 +31,7 @@ class CommentedPostMarkdown extends Mailable
      */
     public function build()
     {
+      
         $subject = "Comment Post For".$this->comment->commentable->title;
         
         return $this
