@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Cache;
+
 
 class Post extends Model
 {
@@ -50,20 +50,6 @@ class Post extends Model
       parent::boot();
 
       static::addGlobalScope(new LatestScope);
-
-      static::deleting(function(Post $post){
-        $post->comments()->delete(); 
-      });
-
-     static::updating(function(Post $post){
-            Cache::forget("post-show-{$post->id}");
-     });
-      
-      
-  
-     static::restoring(function(Post $post){ 
-       $post->comments()->restore();
-     });
 
     }
 }

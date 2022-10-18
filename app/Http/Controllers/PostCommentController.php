@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentPosted as EventsCommentPosted;
 use App\Models\Post;
 use App\Mail\CommentPosted;
 use App\Http\Requests\StoreComment;
@@ -25,12 +26,11 @@ class PostCommentController extends Controller
        'user_id' => $request->user()->id
     ]);
 
-
+    event(new  EventsCommentPosted($comment));
 
     // Mail::to($post->user->email)->send(new CommentPosted($comment));
     // Mail::to($post->useq r->email)->send(new CommentedPostMarkdown($comment));
-    Mail::to($post->user->email)->queue(new CommentedPostMarkdown($comment));
-    NotifyUsersPostWasCommented::dispatch($comment);
+  
     // $when = now()->addMinute(1); 
     // Mail::to($post->user->email)->later($when,new CommentedPostMarkdown($comment));
       

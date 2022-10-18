@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Models;
-
-use App\Scopes\LatestScope;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -37,15 +34,5 @@ class Comment extends Model
     }
 
 
-    public static function boot(){
-        parent::boot();
-
-        static::creating(function(Comment $comment){
-        if($comment->commentable != null){
-            Cache::forget("post-show-{$comment->commentable->id}");
-        }
-     });
-      
   
-      }
 }
