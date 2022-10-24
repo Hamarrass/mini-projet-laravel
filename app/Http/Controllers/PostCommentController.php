@@ -18,7 +18,7 @@ class PostCommentController extends Controller
 
 
   public function show(Post $post){
-    return   CommentResource::collection($post->comments);
+    return   CommentResource::collection($post->comments()->with('user')->get());
   }
 
  public function store(StoreComment $request ,Post $post){

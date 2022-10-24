@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class CommentUserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -13,11 +13,11 @@ class UserResource extends JsonResource
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
-    {
-        return [
+    {  
+         return [
             'id'=>$this->id,
-            'name'=>$this->name
+            'name'=>$this->name,
+            'email'=>$this->when(true,$this->email,'hassanhamarrass@gmail.com'),
         ];
-
     }
 }
