@@ -16,6 +16,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{mix('css/app.css')}}">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     {{-- <link rel="stylesheet" href="{{mix('/css/app.css')}}">
     <link rel="stylesheet" href="{{mix('/css/theme.css')}}"> --}}
 
@@ -24,6 +26,9 @@
 </head>
 <body>
     <div id="app">
+        @if(session()->has('status'))
+        <h1 style="color: green">{{session()->get('status')}}</h1>
+      @endif
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/posts') }}">
@@ -36,7 +41,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="{{route('home')}}">{{__('Home')}}          </a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('about')}}">{{__('Contact')}}      </a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('posts.index')}}">{{__('Posts')}}  </a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{route('posts.create')}}">{{__('Add')}}   </a></li>
+                        </ul>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -61,6 +71,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a href="{{ route('users.show',['user'=>Auth::user()->id])}}" class="dropdown-item">Profile</a>
+                                    <a href="{{ route('users.edit',['user'=>Auth::user()->id])}}" class="dropdown-item">Edit</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -79,12 +91,13 @@
         </nav>
 
         <main class="py-4">
- 
+            <div class="container">
             @yield('content')
+            </div>
         </main>
     </div>
 
-
+    <script src="{{mix('/js/app.js')}}"></script>
    
 </body>
 </html>

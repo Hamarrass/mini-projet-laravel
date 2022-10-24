@@ -6,10 +6,7 @@ use App\Events\CommentPosted as EventsCommentPosted;
 use App\Models\Post;
 use App\Mail\CommentPosted;
 use App\Http\Requests\StoreComment;
-use App\Jobs\NotifyUsersPostWasCommented;
-use App\Mail\CommentedPostMarkdown;
-use Illuminate\Support\Facades\Mail;
-
+use App\Http\Resources\CommentResource;
 
 class PostCommentController extends Controller
 {
@@ -18,6 +15,11 @@ class PostCommentController extends Controller
    {
        $this->middleware('auth')->only(['store']);
    }
+
+
+  public function show(Post $post){
+    return   CommentResource::collection($post->comments);
+  }
 
  public function store(StoreComment $request ,Post $post){
  

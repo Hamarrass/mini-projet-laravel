@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('content')
+
+@php
+ $language = $language ?? "";    
+@endphp
     <form action="{{route('users.update',['user'=>$user->id])}}" method="POST" enctype="multipart/form-data">
         @method('PUT')
         @csrf
@@ -14,6 +18,14 @@
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="language"></label>
+                    <select name="locale" id="language" class="form-control">
+                        @foreach(App\Models\User::LOCALES as $locale =>$label)
+                         <option @if($user->locale==$locale) selected  @endif value="{{old('local',$locale?? '')}}">{{$label}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <button class="btn btn-warning btn-block">Update</button>
             </div>

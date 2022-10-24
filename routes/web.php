@@ -32,7 +32,7 @@ Route::get('/secret',[HomeController::class,'secret'])
     ->name('secret')
     ->middleware('can:secret.page');
 
-Route::resource('posts.comments',PostCommentController::class)->only('store');
+Route::resource('posts.comments',PostCommentController::class)->only('store','show');
 Route::resource('users.comments',UserCommentController::class)->only('store');
 Route::get('posts/archive',[PostController::class,'archive'])->name('archive');
 Route::get('/posts/all',[PostController::class,'all'])->name('all');

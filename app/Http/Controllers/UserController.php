@@ -91,9 +91,13 @@ class UserController extends Controller
             else {
                 $user->image()->save(Image::make(['path'=>$path]));
             }
+           
+        }
+
+         $user->locale=$request->locale;
+            $user->save();
             $request->session()->flash('status','user updated');
             return redirect()->back();
-        }
     }
 
     /**

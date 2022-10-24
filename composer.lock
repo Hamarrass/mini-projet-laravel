@@ -4,8 +4,69 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4131a5c03b502adbf91a68a0b8d73c71",
+    "content-hash": "4bedbba6b61f92a998822558c9e71d9e",
     "packages": [
+        {
+            "name": "abdallhsamy/laravel-hyperpay",
+            "version": "v0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/abdallhsamy/laravel-hyperpay.git",
+                "reference": "5068572e6bc61c6463e8067620a754e4add265c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/abdallhsamy/laravel-hyperpay/zipball/5068572e6bc61c6463e8067620a754e4add265c2",
+                "reference": "5068572e6bc61c6463e8067620a754e4add265c2",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.3|^7.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Abdallhsamy\\LaravelHyperpay\\LaravelHyperpayServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelHyperpay": "Abdallhsamy\\LaravelHyperpay\\Facades\\LaravelHyperpay"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Abdallhsamy\\LaravelHyperpay\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Abdallah Samy",
+                    "email": "abdallhsamy2011@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel package for Hyperpay payment gateway in MENA.",
+            "homepage": "https://github.com/abdallhsamy/laravel-hyperpay",
+            "keywords": [
+                "abdallhsamy",
+                "laravel-hyperpay"
+            ],
+            "support": {
+                "issues": "https://github.com/abdallhsamy/laravel-hyperpay/issues",
+                "source": "https://github.com/abdallhsamy/laravel-hyperpay/tree/v0.1.2"
+            },
+            "time": "2021-05-09T17:17:35+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.1.1",

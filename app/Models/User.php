@@ -15,6 +15,12 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable; 
 
 
+   public const LOCALES =[
+      'en' => 'English',
+      'ar' => 'Arabic',
+      'fr' => 'French'
+   ];
+
     public function posts(){
         return $this->hasMany(Post::class);
     }
@@ -46,7 +52,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-    ];
+        'email_verified_at',
+        'created_at',
+        'updated_at',
+        'is_admin',
+        'locale'
+     ];
 
     /**
      * The attributes that should be cast.

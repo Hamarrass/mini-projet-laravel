@@ -17,6 +17,19 @@ class Post extends Model
     use HasFactory, SoftDeletes;
 
      protected $fillable=['title','content','slug','active','user_id'];
+       /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+     'created_at',
+     'updated_at',
+     'active',
+     'user_id',
+     'deleted_at',
+     'slug'
+   ];
     
      public function comments(){
        return $this->morphMany(Comment::class,'commentable')->dernier() ;

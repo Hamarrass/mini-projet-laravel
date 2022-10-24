@@ -16,10 +16,10 @@
 
     <nav class="navbar navbar-expand navbar-dark bg-success">
         <ul class="nav navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{route('about')}}">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{route('posts.index')}}">Posts</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{route('posts.create')}}">New Post</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('home')}}">{{__('Home')}}          </a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('about')}}">{{__('Contact')}}      </a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('posts.index')}}">{{__('Posts')}}  </a></li>
+            <li class="nav-item"><a class="nav-link" href="{{route('posts.create')}}">{{__('Add')}}   </a></li>
         </ul>
     </nav>
     <div class="container">
